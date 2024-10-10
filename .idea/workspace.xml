@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Start project hackR" />
+    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Start project hackR">
+      <change afterPath="$PROJECT_DIR$/hackR/src/Controller/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hackR/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/hackR/config/packages/security.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +32,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Azazel7Kuro/API.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/Azazel7Kuro/API&quot;,
     &quot;accountId&quot;: &quot;f6c6ef35-6a1a-49d4-967e-f8212a823ee3&quot;
   }
 }</component>
@@ -152,6 +157,8 @@
       <workItem from="1728563516972" duration="122000" />
       <workItem from="1728563647505" duration="192000" />
       <workItem from="1728563847567" duration="171000" />
+      <workItem from="1728564393165" duration="476000" />
+      <workItem from="1728564881720" duration="250000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
