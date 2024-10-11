@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HackController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,3 +22,6 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 // Route Info Utilisateur
 Route::middleware('auth:api')->get('me', [AuthController::class, 'me']);
+
+Route::get('/checkEmailWithHunter/{email}', [HackController::class, 'checkEmailWithHunter']);
+
