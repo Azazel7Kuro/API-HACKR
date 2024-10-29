@@ -11,8 +11,57 @@ use App\Models\User;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @OA\Info(title="API HACK", version="1.0")
+ */
+
 class AuthController extends Controller
 {
+
+    /**
+     * Inscription
+     *
+     * @OA\Post(
+     *     path="/api/register",
+     *     tags={"Authentication"},
+     *     summary="Inscrire un nouvel utilisateur",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name","email","password"},
+     *             @OA\Property(property="name", type="string", example="John Doe"),
+     *             @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="password123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Utilisateur créé avec succès",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="access_token", type="string"),
+     *             @OA\Property(property="token_type", type="string", example="bearer"),
+     *             @OA\Property(property="expires_in", type="integer")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Données invalides ou utilisateur existant",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *             @OA\Property(property="messages", type="array", @OA\Items(type="string"))
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erreur de création d'utilisateur",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *             @OA\Property(property="details", type="string")
+     *         )
+     *     )
+     * )
+     */
+
     // Inscription
     public function register(Request $request)
     {
@@ -66,6 +115,43 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * Connexion et génération du token
+     *
+     * @OA\Post(
+     *     path="/api/login",
+     *     tags={"Authentication"},
+     *     summary="Connexion de l'utilisateur",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="password123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Connexion réussie",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="access_token", type="string"),
+     *             @OA\Property(property="token_type", type="string", example="bearer"),
+     *             @OA\Property(property="expires_in", type="integer")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Identifiants incorrects",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Unauthorized"))
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erreur de génération de token",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Could not create token"))
+     *     )
+     * )
+     */
+
     // Connexion et génération du token
     public function login(Request $request)
     {
@@ -95,6 +181,41 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /**
+     * Obtenir les informations de l'utilisateur connecté
+     *
+     * @OA\Get(
+     *     path="/api/me",
+     *     tags={"Authentication"},
+     *     summary="Obtenir les informations de l'utilisateur connecté",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Informations de l'utilisateur",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="integer"),
+     *             @OA\Property(property="name", type="string"),
+     *             @OA\Property(property="email", type="string", format="email")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=402,
+     *         description="Token expiré",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Token expired"))
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Token invalide",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Token invalid"))
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Token absent",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Token absent"))
+     *     )
+     * )
+     */
+
     // Renvoie la structure de la réponse avec le token
     protected function respondWithToken($token)
     {
@@ -123,11 +244,17 @@ class AuthController extends Controller
             // Retourner les informations de l'utilisateur
             return response()->json($user);
         } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['error' => 'Token expired'], 401);
+            return response()->json(['error' => 'Token expired'], 402);
         } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['error' => 'Token invalid'], 401);
+            return response()->json(['error' => 'Token invalid'], 403);
         } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['error' => 'Token absent'], 401);
+            return response()->json(['error' => 'Token absent'], 404);
         }
     }
+    /**
+     * Structure de la réponse avec le token
+     *
+     * @param string $token
+     * @return \Illuminate\Http\JsonResponse
+     */
 }

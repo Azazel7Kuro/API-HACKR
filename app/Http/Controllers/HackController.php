@@ -10,6 +10,49 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class HackController extends Controller
 {
+
+    /**
+     * Vérification si l'email existe via Hunter.io
+     *
+     * @OA\Get(
+     *     path="/api/checkEmailWithHunter/{email}",
+     *     tags={"Email Verification"},
+     *     summary="Vérifie si l'email existe via Hunter.io",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string", format="email")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Email vérifié avec succès",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="score", type="integer"),
+     *             @OA\Property(property="status", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Email non valide",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Email is not valid")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erreur lors de la vérification de l'email",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="error", type="string", example="There was an error verifying the email")
+     *         )
+     *     ),
+     * )
+     */
+
     // Vérification si l'email existe via Hunter.io
     public function checkEmailWithHunter($email)
     {
@@ -47,7 +90,7 @@ class HackController extends Controller
 
 
             // Si l'email n'est pas valide
-            return response()->json(['message' => 'Email is not valid'], 404);
+            return response()->json(['message' => 'Email is not valid'], 405);
 
         } catch (\Exception $e) {
             // Gérer les erreurs (par exemple si l'API ne répond pas)
