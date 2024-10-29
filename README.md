@@ -4,7 +4,7 @@
 ## Fonctionnalités
 
 * Outil de vérification d'existence d'adresse mail ✅
-
+* Spammer de mail (contenu + nombre d'envoi) ✅
 
 ## Obligations
 

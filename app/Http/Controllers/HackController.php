@@ -6,6 +6,7 @@ use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class HackController extends Controller
@@ -98,5 +99,53 @@ class HackController extends Controller
                 'error' => 'There was an error verifying the email',
             ], 500);
         }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/spam-email",
+     *     tags={"EmailSpam"},
+     *     summary="Envoyer un spam par e-mail",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "content", "count"},
+     *             @OA\Property(property="email", type="string", format="email", example="example@example.com"),
+     *             @OA\Property(property="content", type="string", example="Ceci est un message de spam."),
+     *             @OA\Property(property="count", type="integer", example=10)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="E-mails envoyés avec succès",
+     *         @OA\JsonContent(@OA\Property(property="message", type="string", example="E-mails envoyés avec succès"))
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Erreur dans les paramètres fournis",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Invalid parameters"))
+     *     )
+     * )
+     */
+    public function spamEmail(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'content' => 'required|string',
+            'count' => 'required|integer|min:1',
+        ]);
+
+        $email = $validatedData['email'];
+        $content = $validatedData['content'];
+        $count = $validatedData['count'];
+
+        for ($i = 0; $i < $count; $i++) {
+            Mail::raw($content, function ($message) use ($email) {
+                $message->to($email)
+                    ->subject('it\'s a trap');
+            });
+        }
+
+        return response()->json(['message' => 'E-mails envoyes avec succes'], 200);
     }
 }

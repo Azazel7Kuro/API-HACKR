@@ -24,4 +24,5 @@ Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:api')->get('me', [AuthController::class, 'me']);
 
 Route::get('/checkEmailWithHunter/{email}', [HackController::class, 'checkEmailWithHunter']);
+Route::post('/spam-email', [HackController::class, 'spamEmail']);
 
