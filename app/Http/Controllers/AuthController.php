@@ -89,7 +89,7 @@ class AuthController extends Controller
 
             $token = JWTAuth::fromUser($user);
 
-            Log::create([
+            \App\Models\Log::create([
                 'id_user' => $user->id,
                 'action' => 'register',
                 'date' => now(),
@@ -161,7 +161,7 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        Log::create([
+        \App\Models\Log::create([
             'id_user' => $user->id,
             'action' => 'login',
             'date' => now(),
@@ -215,12 +215,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function me()
+    public function me(): \Illuminate\Http\JsonResponse
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
 
-            Log::create([
+            \App\Models\Log::create([
                 'id_user' => $user->id,
                 'action' => 'get_user_info',
                 'date' => now(),

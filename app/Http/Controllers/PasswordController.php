@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PasswordController extends Controller
@@ -42,12 +41,13 @@ class PasswordController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
 
-        Log::create([
+        \App\Models\Log::create([
             'id_user' => $user->id,
             'action' => 'generateSecurePassword',
             'date' => now(),
             'id_action' => 6,
         ]);
+
         $length = $request->query('length', 12);
 
         if ($length < 8) {
@@ -102,7 +102,7 @@ class PasswordController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
 
-        Log::create([
+        \App\Models\Log::create([
             'id_user' => $user->id,
             'action' => 'checkcommonpassword',
             'date' => now(),

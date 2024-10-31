@@ -39,3 +39,6 @@ Route::get('/log-action/{id_action}', [LogController::class, 'getLogsByFunctionI
 Route::get('/log-user/{id_user}', [LogController::class, 'getUserLogs']);
 
 Route::get('/domains/{domain}', [HackController::class, 'getDomains']);
+
+Route::get('/generate-fake-identity/{count}', [HackController::class, 'generateFakeIdentity']);
+

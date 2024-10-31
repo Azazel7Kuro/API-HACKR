@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Faker\Factory as Faker;
 
 class HackController extends Controller
 {
@@ -64,7 +65,7 @@ class HackController extends Controller
             $data = json_decode($response->getBody(), true);
             $user = JWTAuth::parseToken()->authenticate();
 
-            Log::create([
+            \App\Models\Log::create([
                 'id_user' => $user->id,
                 'action' => 'check_email',
                 'date' => now(),
@@ -119,7 +120,7 @@ class HackController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
 
-        Log::create([
+        \App\Models\Log::create([
             'id_user' => $user->id,
             'action' => 'spamEmail',
             'date' => now(),
@@ -184,6 +185,15 @@ class HackController extends Controller
      */
     public function getDomains(Request $request, $domain): \Illuminate\Http\JsonResponse
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        \App\Models\Log::create([
+            'id_user' => $user->id,
+            'action' => 'Domains',
+            'date' => now(),
+            'id_action' => 8,
+        ]);
+
         $apiKey = 'XMNTJ39Dkt97iJo9guYx6LDZXec0ZYcy';
         $client = new Client();
 
@@ -206,5 +216,60 @@ class HackController extends Controller
                 'error' => 'Could not retrieve domains',
             ], 500);
         }
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/generate-fake-identity/{count}",
+     *     tags={"Fake Identity"},
+     *     summary="Generate a list of fake identities",
+     *     @OA\Parameter(
+     *         name="count",
+     *         in="path",
+     *         required=false,
+     *         @OA\Schema(type="integer", default=1, description="Number of identities to generate")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of generated fake identities",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="email", type="string"),
+     *                 @OA\Property(property="address", type="string"),
+     *                 @OA\Property(property="phone", type="string"),
+     *                 @OA\Property(property="company", type="string")
+     *             )
+     *         )
+     *     )
+     * )
+     */
+
+    public function generateFakeIdentity($count): \Illuminate\Http\JsonResponse
+    {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        \App\Models\Log::create([
+            'id_user' => $user->id,
+            'action' => 'FakerId',
+            'date' => now(),
+            'id_action' => 9,
+        ]);
+
+        $faker = Faker::create();
+
+        $identities = [];
+        for ($i = 0; $i < $count; $i++) {
+            $identities[] = [
+                'name' => $faker->name,
+                'email' => $faker->email,
+                'address' => $faker->address,
+                'phone' => $faker->phoneNumber,
+                'company' => $faker->company,
+            ];
+        }
+
+        return response()->json($identities);
     }
 }
