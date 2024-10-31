@@ -8,6 +8,7 @@
 * Générateur de mot de passe sécurisé ✅
 * Est-ce que le MDP est sur la liste des plus courants ✅
 * récupérer tous domaines & sous-domaines associés à un Nom De Domaine ✅
+* Génération d'identité fictive => utilisez la lirairie Faker ! ✅
 
 ## Obligations
 

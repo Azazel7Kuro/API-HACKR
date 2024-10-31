@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Récuperation des logs par log_id et user_id + Fonctionnalité domaines &amp; sous-domaines">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HackController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/api-docs/api-docs.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/api-docs/api-docs.json" afterDir="false" />
-    </list>
+    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Fake Id" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -290,7 +282,7 @@
       <workItem from="1730198640650" duration="163000" />
       <workItem from="1730198815456" duration="10882000" />
       <workItem from="1730300518697" duration="974000" />
-      <workItem from="1730360870706" duration="13147000" />
+      <workItem from="1730360870706" duration="13543000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -372,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730372247660</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fake Id">
+      <option name="closed" value="true" />
+      <created>1730389495701</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1730389495701</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,6 +397,7 @@
     <MESSAGE value="Ajout du Spammer de mail" />
     <MESSAGE value="Ajout du générateur de mdp" />
     <MESSAGE value="Récuperation des logs par log_id et user_id + Fonctionnalité domaines &amp; sous-domaines" />
-    <option name="LAST_COMMIT_MESSAGE" value="Récuperation des logs par log_id et user_id + Fonctionnalité domaines &amp; sous-domaines" />
+    <MESSAGE value="Fake Id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fake Id" />
   </component>
 </project>
