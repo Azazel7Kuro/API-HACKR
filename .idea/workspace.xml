@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Ajout du Spammer de mail">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" afterDir="false" />
+    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Ajout du générateur de mdp">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/LogController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HackController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/api-docs/api-docs.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/api-docs/api-docs.json" afterDir="false" />
     </list>
@@ -289,7 +290,7 @@
       <workItem from="1730198640650" duration="163000" />
       <workItem from="1730198815456" duration="10882000" />
       <workItem from="1730300518697" duration="974000" />
-      <workItem from="1730360870706" duration="2351000" />
+      <workItem from="1730360870706" duration="9200000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -347,7 +348,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730215471518</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ajout du générateur de mdp">
+      <option name="closed" value="true" />
+      <created>1730363511371</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730363511371</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,6 +379,7 @@
     <MESSAGE value="Ajout CheckEmail avec HackController" />
     <MESSAGE value="Ajout de Swagger + Update ReadMe" />
     <MESSAGE value="Ajout du Spammer de mail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout du Spammer de mail" />
+    <MESSAGE value="Ajout du générateur de mdp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout du générateur de mdp" />
   </component>
 </project>

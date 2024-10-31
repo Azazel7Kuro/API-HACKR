@@ -291,7 +291,7 @@
         "/api/checkEmailWithHunter/{email}": {
             "get": {
                 "tags": [
-                    "Email Verification"
+                    "Emails"
                 ],
                 "summary": "Check if the email exists using Hunter.io",
                 "description": "Check if the email exists using Hunter.io",
@@ -367,7 +367,7 @@
         "/api/spam-email": {
             "post": {
                 "tags": [
-                    "Email Spam"
+                    "Emails"
                 ],
                 "summary": "Send spam emails",
                 "operationId": "ceb1048e5a3fdea02806f3ae88e646f2",
@@ -437,6 +437,211 @@
                 }
             }
         },
+        "/api/domains/{domain}": {
+            "get": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Retrieve all domains and subdomains associated with a given domain",
+                "operationId": "8e786929cd6028c1e92e23fdef419e9a",
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Domains and subdomains retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string"
+                                        },
+                                        "subdomains": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Domain not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Domain not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error retrieving domains",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Could not retrieve domains"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logs/{id_action}": {
+            "get": {
+                "tags": [
+                    "Logs"
+                ],
+                "summary": "Retrieve logs by action ID",
+                "operationId": "39ae429ff74169955384d24a6282721c",
+                "parameters": [
+                    {
+                        "name": "id_action",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logs retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "action": {
+                                                "type": "string"
+                                            },
+                                            "date": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "user_name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No logs found for this action ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No logs found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user-logs/{id_user}": {
+            "get": {
+                "tags": [
+                    "Logs"
+                ],
+                "summary": "Retrieve all logs for a specific user",
+                "operationId": "91875cbc7789bad6ad43f50a33381638",
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logs retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "action": {
+                                                "type": "string"
+                                            },
+                                            "date": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "user_name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No logs found for this user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No logs found for this user"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/generate-password": {
             "get": {
                 "tags": [
@@ -492,6 +697,85 @@
                     }
                 }
             }
+        },
+        "/api/check-common-password": {
+            "post": {
+                "tags": [
+                    "Password"
+                ],
+                "summary": "Check if a password is common and insecure",
+                "description": "Verifies if the provided password is in a list of the most common passwords, making it insecure.",
+                "operationId": "2b6f2b040644a2107daf20d9a2820793",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "password"
+                                ],
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password is not in the list of common passwords",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This password is not in the list of common passwords."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Password is too common and insecure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This password is too common and insecure."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error retrieving the password list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unable to retrieve password list."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -500,12 +784,16 @@
             "description": "Authentication"
         },
         {
-            "name": "Email Verification",
-            "description": "Email Verification"
+            "name": "Emails",
+            "description": "Emails"
         },
         {
-            "name": "Email Spam",
-            "description": "Email Spam"
+            "name": "Domain",
+            "description": "Domain"
+        },
+        {
+            "name": "Logs",
+            "description": "Logs"
         },
         {
             "name": "Password",

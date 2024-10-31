@@ -16,7 +16,7 @@ class HackController extends Controller
      *
      * @OA\Get(
      *     path="/api/checkEmailWithHunter/{email}",
-     *     tags={"Email Verification"},
+     *     tags={"Emails"},
      *     summary="Check if the email exists using Hunter.io",
      *     @OA\Parameter(
      *         name="email",
@@ -92,7 +92,7 @@ class HackController extends Controller
     /**
      * @OA\Post(
      *     path="/api/spam-email",
-     *     tags={"Email Spam"},
+     *     tags={"Emails"},
      *     summary="Send spam emails",
      *     @OA\RequestBody(
      *         required=true,
@@ -117,6 +117,15 @@ class HackController extends Controller
      */
     public function spamEmail(Request $request): \Illuminate\Http\JsonResponse
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        Log::create([
+            'id_user' => $user->id,
+            'action' => 'spamEmail',
+            'date' => now(),
+            'id_action' => 5,
+        ]);
+
         $validatedData = $request->validate([
             'email' => 'required|email',
             'content' => 'required|string',
@@ -135,5 +144,67 @@ class HackController extends Controller
         }
 
         return response()->json(['message' => 'Emails sent successfully'], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/domains/{domain}",
+     *     tags={"Domain"},
+     *     summary="Retrieve all domains and subdomains associated with a given domain",
+     *     @OA\Parameter(
+     *         name="domain",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Domains and subdomains retrieved successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="domain", type="string"),
+     *             @OA\Property(property="subdomains", type="array", @OA\Items(type="string")),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Domain not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Domain not found")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error retrieving domains",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Could not retrieve domains")
+     *         )
+     *     )
+     * )
+     */
+    public function getDomains(Request $request, $domain): \Illuminate\Http\JsonResponse
+    {
+        $apiKey = 'XMNTJ39Dkt97iJo9guYx6LDZXec0ZYcy';
+        $client = new Client();
+
+        try {
+            $response = $client->get("https://api.securitytrails.com/v1/domain/{$domain}/subdomains", [
+                'headers' => [
+                    'APIKEY' => $apiKey,
+                ],
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+            $subdomains = $data['subdomains'] ?? [];
+
+            return response()->json([
+                'domain' => $domain,
+                'subdomains' => $subdomains,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Could not retrieve domains',
+            ], 500);
+        }
     }
 }

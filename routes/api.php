@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\PasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,12 @@ Route::post('/spam-email', [HackController::class, 'spamEmail']);
 // Route pour le générateur de mdp
 Route::get('/generate-password', [PasswordController::class, 'generateSecurePassword']);
 
+Route::post('/verified-password', [PasswordController::class, 'checkCommonPassword']);
 
+Route::get('/logs', [LogController::class, 'getLogs']);
+
+Route::get('/log-action/{id_action}', [LogController::class, 'getLogsByFunctionId']);
+
+Route::get('/log-user/{id_user}', [LogController::class, 'getUserLogs']);
+
+Route::get('/domains/{domain}', [HackController::class, 'getDomains']);
