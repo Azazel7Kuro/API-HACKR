@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\User;
@@ -19,12 +22,12 @@ class AuthController extends Controller
 {
 
     /**
-     * Inscription
+     * User registration
      *
      * @OA\Post(
      *     path="/api/register",
      *     tags={"Authentication"},
-     *     summary="Inscrire un nouvel utilisateur",
+     *     summary="Register a new user",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -36,7 +39,7 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Utilisateur créé avec succès",
+     *         description="User successfully created",
      *         @OA\JsonContent(
      *             @OA\Property(property="access_token", type="string"),
      *             @OA\Property(property="token_type", type="string", example="bearer"),
@@ -45,7 +48,7 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Données invalides ou utilisateur existant",
+     *         description="Invalid data or user already exists",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="string"),
      *             @OA\Property(property="messages", type="array", @OA\Items(type="string"))
@@ -53,7 +56,7 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Erreur de création d'utilisateur",
+     *         description="Error creating user",
      *         @OA\JsonContent(
      *             @OA\Property(property="error", type="string"),
      *             @OA\Property(property="details", type="string")
@@ -62,10 +65,8 @@ class AuthController extends Controller
      * )
      */
 
-    // Inscription
     public function register(Request $request)
     {
-        // Valider les données
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
@@ -73,14 +74,12 @@ class AuthController extends Controller
                 'password' => 'required|string|min:6',
             ]);
         } catch (ValidationException $e) {
-            // Si la validation échoue, retourner une réponse d'erreur
             return response()->json([
-                'error' => 'L\'utilisateur existe déjà ou les données sont invalides.',
+                'error' => 'User already exists or invalid data.',
                 'messages' => $e->errors()
             ], 422);
         }
 
-        // Essayer de créer l'utilisateur
         try {
             $user = User::create([
                 'name' => $validatedData['name'],
@@ -88,10 +87,8 @@ class AuthController extends Controller
                 'password' => Hash::make($validatedData['password']),
             ]);
 
-            // Générer un token JWT pour l'utilisateur
             $token = JWTAuth::fromUser($user);
 
-            // Enregistrer l'action de log
             Log::create([
                 'id_user' => $user->id,
                 'action' => 'register',
@@ -99,29 +96,27 @@ class AuthController extends Controller
                 'id_action' => 1,
             ]);
 
-            // Retourner la réponse avec le token
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'bearer',
                 'expires_in' => JWTAuth::factory()->getTTL() * 60,
             ], 201);
 
-        } catch (\Exception $e) {
-            // Gérer les erreurs qui pourraient survenir lors de la création de l'utilisateur
+        } catch (Exception $e) {
             return response()->json([
-                'error' => 'La création de l\'utilisateur a échoué. Veuillez réessayer.',
+                'error' => 'User creation failed. Please try again.',
                 'details' => $e->getMessage(),
             ], 500);
         }
     }
 
     /**
-     * Connexion et génération du token
+     * Login and token generation
      *
      * @OA\Post(
      *     path="/api/login",
      *     tags={"Authentication"},
-     *     summary="Connexion de l'utilisateur",
+     *     summary="User login",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -132,7 +127,7 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Connexion réussie",
+     *         description="Login successful",
      *         @OA\JsonContent(
      *             @OA\Property(property="access_token", type="string"),
      *             @OA\Property(property="token_type", type="string", example="bearer"),
@@ -141,24 +136,22 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *         response=401,
-     *         description="Identifiants incorrects",
+     *         description="Invalid credentials",
      *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Unauthorized"))
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Erreur de génération de token",
+     *         description="Error generating token",
      *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Could not create token"))
      *     )
      * )
      */
 
-    // Connexion et génération du token
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         try {
-            // Tentative d'authentification et génération du token JWT
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
@@ -166,10 +159,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'Could not create token'], 500);
         }
 
-        // Récupérer l'utilisateur authentifié
         $user = Auth::user();
 
-        // Créer un log pour l'action de connexion
         Log::create([
             'id_user' => $user->id,
             'action' => 'login',
@@ -177,21 +168,20 @@ class AuthController extends Controller
             'id_action' => 2,
         ]);
 
-        // Retourner le token avec la structure de la réponse
         return $this->respondWithToken($token);
     }
 
     /**
-     * Obtenir les informations de l'utilisateur connecté
+     * Get logged-in user information
      *
      * @OA\Get(
      *     path="/api/me",
      *     tags={"Authentication"},
-     *     summary="Obtenir les informations de l'utilisateur connecté",
+     *     summary="Get logged-in user information",
      *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
-     *         description="Informations de l'utilisateur",
+     *         description="User information",
      *         @OA\JsonContent(
      *             @OA\Property(property="id", type="integer"),
      *             @OA\Property(property="name", type="string"),
@@ -200,12 +190,12 @@ class AuthController extends Controller
      *     ),
      *     @OA\Response(
      *         response=402,
-     *         description="Token expiré",
+     *         description="Token expired",
      *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Token expired"))
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="Token invalide",
+     *         description="Token invalid",
      *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Token invalid"))
      *     ),
      *     @OA\Response(
@@ -216,7 +206,6 @@ class AuthController extends Controller
      * )
      */
 
-    // Renvoie la structure de la réponse avec le token
     protected function respondWithToken($token)
     {
         return response()->json([
@@ -226,35 +215,25 @@ class AuthController extends Controller
         ]);
     }
 
-    // Retourner les informations de l'utilisateur connecté
     public function me()
     {
         try {
-            // Obtenir l'utilisateur authentifié grâce au token JWT
             $user = JWTAuth::parseToken()->authenticate();
 
-            // Créer un log pour l'action 'me'
             Log::create([
                 'id_user' => $user->id,
                 'action' => 'get_user_info',
                 'date' => now(),
-                'id_action' => 3, // Identifier l'action "me" avec un id spécifique
+                'id_action' => 3,
             ]);
 
-            // Retourner les informations de l'utilisateur
             return response()->json($user);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+        } catch (TokenExpiredException $e) {
             return response()->json(['error' => 'Token expired'], 402);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+        } catch (TokenInvalidException $e) {
             return response()->json(['error' => 'Token invalid'], 403);
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+        } catch (JWTException $e) {
             return response()->json(['error' => 'Token absent'], 404);
         }
     }
-    /**
-     * Structure de la réponse avec le token
-     *
-     * @param string $token
-     * @return \Illuminate\Http\JsonResponse
-     */
 }

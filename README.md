@@ -5,6 +5,7 @@
 
 * Outil de vérification d'existence d'adresse mail ✅
 * Spammer de mail (contenu + nombre d'envoi) ✅
+* Générateur de mot de passe sécurisé ✅
 
 ## Obligations
 

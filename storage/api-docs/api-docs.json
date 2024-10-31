@@ -10,8 +10,8 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Inscrire un nouvel utilisateur",
-                "description": "Inscription",
+                "summary": "Register a new user",
+                "description": "User registration",
                 "operationId": "8a56853624e025573120a09a4c75d468",
                 "requestBody": {
                     "required": true,
@@ -46,7 +46,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Utilisateur créé avec succès",
+                        "description": "User successfully created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -68,7 +68,7 @@
                         }
                     },
                     "422": {
-                        "description": "Données invalides ou utilisateur existant",
+                        "description": "Invalid data or user already exists",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -89,7 +89,7 @@
                         }
                     },
                     "500": {
-                        "description": "Erreur de création d'utilisateur",
+                        "description": "Error creating user",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -114,8 +114,8 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Connexion de l'utilisateur",
-                "description": "Connexion et génération du token",
+                "summary": "User login",
+                "description": "Login and token generation",
                 "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
                 "requestBody": {
                     "required": true,
@@ -145,7 +145,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Connexion réussie",
+                        "description": "Login successful",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -167,7 +167,7 @@
                         }
                     },
                     "401": {
-                        "description": "Identifiants incorrects",
+                        "description": "Invalid credentials",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -183,7 +183,7 @@
                         }
                     },
                     "500": {
-                        "description": "Erreur de génération de token",
+                        "description": "Error generating token",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -206,12 +206,12 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Obtenir les informations de l'utilisateur connecté",
-                "description": "Obtenir les informations de l'utilisateur connecté",
+                "summary": "Get logged-in user information",
+                "description": "Get logged-in user information",
                 "operationId": "ff912d226812b3ce5418f6502c1a7e46",
                 "responses": {
                     "200": {
-                        "description": "Informations de l'utilisateur",
+                        "description": "User information",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -233,7 +233,7 @@
                         }
                     },
                     "402": {
-                        "description": "Token expiré",
+                        "description": "Token expired",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -249,7 +249,7 @@
                         }
                     },
                     "403": {
-                        "description": "Token invalide",
+                        "description": "Token invalid",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -293,8 +293,8 @@
                 "tags": [
                     "Email Verification"
                 ],
-                "summary": "Vérifie si l'email existe via Hunter.io",
-                "description": "Vérification si l'email existe via Hunter.io",
+                "summary": "Check if the email exists using Hunter.io",
+                "description": "Check if the email exists using Hunter.io",
                 "operationId": "81da2918e7b9a4947237b0b19d236cf8",
                 "parameters": [
                     {
@@ -309,7 +309,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Email vérifié avec succès",
+                        "description": "Email successfully verified",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -330,7 +330,7 @@
                         }
                     },
                     "404": {
-                        "description": "Email non valide",
+                        "description": "Email is not valid",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -346,7 +346,7 @@
                         }
                     },
                     "500": {
-                        "description": "Erreur lors de la vérification de l'email",
+                        "description": "Error occurred during email verification",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -367,9 +367,9 @@
         "/api/spam-email": {
             "post": {
                 "tags": [
-                    "EmailSpam"
+                    "Email Spam"
                 ],
-                "summary": "Envoyer un spam par e-mail",
+                "summary": "Send spam emails",
                 "operationId": "ceb1048e5a3fdea02806f3ae88e646f2",
                 "requestBody": {
                     "required": true,
@@ -389,7 +389,7 @@
                                     },
                                     "content": {
                                         "type": "string",
-                                        "example": "Ceci est un message de spam."
+                                        "example": "This is a spam message."
                                     },
                                     "count": {
                                         "type": "integer",
@@ -403,14 +403,14 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "E-mails envoyés avec succès",
+                        "description": "Emails sent successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "E-mails envoyés avec succès"
+                                            "example": "Emails sent successfully"
                                         }
                                     },
                                     "type": "object"
@@ -419,7 +419,7 @@
                         }
                     },
                     "400": {
-                        "description": "Erreur dans les paramètres fournis",
+                        "description": "Invalid parameters provided",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -427,6 +427,62 @@
                                         "error": {
                                             "type": "string",
                                             "example": "Invalid parameters"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/generate-password": {
+            "get": {
+                "tags": [
+                    "Password"
+                ],
+                "summary": "Generate a secure password",
+                "description": "Generate a secure password.",
+                "operationId": "fb8d50b2dc70818bf841d978152f42b0",
+                "parameters": [
+                    {
+                        "name": "length",
+                        "in": "query",
+                        "description": "Desired password length (default is 12)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 12
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Secure password generated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "password": {
+                                            "type": "string",
+                                            "example": "aZ3$w8@kF"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid length provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Password length must be at least 8"
                                         }
                                     },
                                     "type": "object"
@@ -448,8 +504,12 @@
             "description": "Email Verification"
         },
         {
-            "name": "EmailSpam",
-            "description": "EmailSpam"
+            "name": "Email Spam",
+            "description": "Email Spam"
+        },
+        {
+            "name": "Password",
+            "description": "Password"
         }
     ]
 }
