@@ -42,3 +42,4 @@ Route::get('/domains/{domain}', [HackController::class, 'getDomains']);
 
 Route::get('/generate-fake-identity/{count}', [HackController::class, 'generateFakeIdentity']);
 
+Route::get('/random-person-image', [HackController::class, 'getRandomPersonImage']);

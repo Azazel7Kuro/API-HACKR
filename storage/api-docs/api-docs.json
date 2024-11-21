@@ -564,6 +564,45 @@
                 }
             }
         },
+        "/api/random-person-image": {
+            "get": {
+                "tags": [
+                    "Faker"
+                ],
+                "summary": "Get a random AI-generated person's image",
+                "description": "Fetches and displays a random AI-generated person's image from thispersondoesnotexist.com",
+                "operationId": "e6f49e70f49d02c40dc637f3205dc628",
+                "responses": {
+                    "200": {
+                        "description": "Image successfully retrieved",
+                        "content": {
+                            "image/jpeg": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to fetch the image",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Could not fetch image."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/logs/{id_action}": {
             "get": {
                 "tags": [
@@ -847,6 +886,10 @@
         {
             "name": "Fake Identity",
             "description": "Fake Identity"
+        },
+        {
+            "name": "Faker",
+            "description": "Faker"
         },
         {
             "name": "Logs",

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Log;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Faker\Factory as Faker;
 
@@ -271,5 +274,55 @@ class HackController extends Controller
         }
 
         return response()->json($identities);
+    }
+
+    /**
+     * Get a random person's image from thispersondoesnotexist.com
+     *
+     * @OA\Get(
+     *     path="/api/random-person-image",
+     *     tags={"Faker"},
+     *     summary="Get a random AI-generated person's image",
+     *     description="Fetches and displays a random AI-generated person's image from thispersondoesnotexist.com",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Image successfully retrieved",
+     *         content={
+     *             @OA\MediaType(
+     *                 mediaType="image/jpeg",
+     *                 @OA\Schema(type="string", format="binary")
+     *             )
+     *         }
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to fetch the image",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Could not fetch image."))
+     *     )
+     * )
+     */
+
+    public function getRandomPersonImage()
+    {
+        $url = 'https://thispersondoesnotexist.com';
+
+        try {
+            // Récupérer l'image depuis l'URL
+            $response = Http::get($url);
+
+            if ($response->successful()) {
+                // Créer une réponse avec le contenu de l'image
+                return new StreamedResponse(function () use ($response) {
+                    echo $response->body();
+                }, 200, [
+                    'Content-Type' => 'image/jpeg',
+                    'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+                ]);
+            }
+
+            return response()->json(['error' => 'Could not fetch image.'], 500);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while fetching the image.'], 500);
+        }
     }
 }
