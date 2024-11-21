@@ -325,4 +325,81 @@ class HackController extends Controller
             return response()->json(['error' => 'An error occurred while fetching the image.'], 500);
         }
     }
+
+    /**
+     * Fetch enriched data about a person using SerpApi.
+     *
+     * @OA\Get(
+     *     path="/api/person-info-serpapi",
+     *     tags={"Person"},
+     *     summary="Get enriched information about a person using SerpApi",
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Name of the person",
+     *         required=true,
+     *         @OA\Schema(type="string", example="Elon Musk")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Information retrieved successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="name", type="string", example="Elon Musk"),
+     *             @OA\Property(property="bio", type="string", example="Elon Musk is a businessman and entrepreneur."),
+     *             @OA\Property(property="social_media", type="object",
+     *                @OA\Property(property="twitter", type="string", example="https://twitter.com/elonmusk")
+     *             ),
+     *             @OA\Property(property="wiki_url", type="string", example="https://en.wikipedia.org/wiki/Elon_Musk")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid name provided",
+     *         @OA\JsonContent(@OA\Property(property="error", type="string", example="Name is required"))
+     *     )
+     * )
+     */
+    public function fetchPersonInfoSerpApi(Request $request): JsonResponse
+    {
+        $name = $request->query('name');
+
+        if (!$name) {
+            return response()->json(['error' => 'Name is required'], 400);
+        }
+
+        try {
+            $apiKey = env('SERPAPI_API_KEY');
+            $url = "https://serpapi.com/search?q=" . urlencode($name) . "&api_key=" . $apiKey . "&engine=google";
+
+            // Make the API call to SerpApi
+            $response = Http::get($url);
+
+            if ($response->failed()) {
+                return response()->json(['error' => 'Failed to fetch data from SerpApi'], 500);
+            }
+
+            // Parse the response from SerpApi
+            $data = $response->json();
+
+            if (isset($data['organic_results']) && count($data['organic_results']) > 0) {
+                $personInfo = $data['organic_results'][0]; // Taking the first search result
+
+                // Extracting useful information from the first result
+                $info = [
+                    'name' => $name,
+                    'bio' => $personInfo['snippet'] ?? 'No bio available',
+                    'social_media' => [
+                        'twitter' => $personInfo['social'] ?? 'No social media found'
+                    ],
+                    'wiki_url' => $personInfo['link'] ?? 'No link available',
+                ];
+
+                return response()->json($info, 200);
+            } else {
+                return response()->json(['error' => 'No relevant results found'], 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+        }
+    }
 }

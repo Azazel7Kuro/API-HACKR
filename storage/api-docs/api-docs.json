@@ -603,6 +603,79 @@
                 }
             }
         },
+        "/api/person-info-serpapi": {
+            "get": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Get enriched information about a person using SerpApi",
+                "description": "Fetch enriched data about a person using SerpApi.",
+                "operationId": "af2431257e17a2a1161b382e543c3abe",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of the person",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Elon Musk"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Information retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Elon Musk"
+                                        },
+                                        "bio": {
+                                            "type": "string",
+                                            "example": "Elon Musk is a businessman and entrepreneur."
+                                        },
+                                        "social_media": {
+                                            "properties": {
+                                                "twitter": {
+                                                    "type": "string",
+                                                    "example": "https://twitter.com/elonmusk"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "wiki_url": {
+                                            "type": "string",
+                                            "example": "https://en.wikipedia.org/wiki/Elon_Musk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid name provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Name is required"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/logs/{id_action}": {
             "get": {
                 "tags": [
@@ -890,6 +963,10 @@
         {
             "name": "Faker",
             "description": "Faker"
+        },
+        {
+            "name": "Person",
+            "description": "Person"
         },
         {
             "name": "Logs",
