@@ -29,29 +29,29 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable implements JWTSubject
 {
-	protected $table = 'users';
+    protected $table = 'users';
 
-	protected $casts = [
-		'email_verified_at' => 'datetime'
-	];
+    protected $casts = [
+        'email_verified_at' => 'datetime'
+    ];
 
-	protected $hidden = [
-		'password',
-		'remember_token'
-	];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
-	protected $fillable = [
-		'name',
-		'email',
-		'email_verified_at',
-		'password',
-		'remember_token'
-	];
+    protected $fillable = [
+        'name',
+        'email',
+        'email_verified_at',
+        'password',
+        'remember_token'
+    ];
 
-	public function logs()
-	{
-		return $this->hasMany(Log::class, 'id_user');
-	}
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'id_user');
+    }
 
     // Identifiant principal pour JWT (par défaut, l'id de l'utilisateur)
     public function getJWTIdentifier()
@@ -63,5 +63,20 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->roles->contains('name', 'admin');
+    }
+
+    public function isUser()
+    {
+        return $this->roles->contains('name', 'user');
     }
 }

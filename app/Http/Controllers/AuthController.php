@@ -219,6 +219,7 @@ class AuthController extends Controller
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
+            $roles = $user->roles->pluck('name');
 
             \App\Models\Log::create([
                 'id_user' => $user->id,
@@ -227,7 +228,12 @@ class AuthController extends Controller
                 'id_action' => 3,
             ]);
 
-            return response()->json($user);
+            return response()->json([
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $roles
+            ]);
         } catch (TokenExpiredException $e) {
             return response()->json(['error' => 'Token expired'], 402);
         } catch (TokenInvalidException $e) {
