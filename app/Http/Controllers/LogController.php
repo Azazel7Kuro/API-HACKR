@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Log;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LogController extends Controller
 {
     public function getLogs(): JsonResponse
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        // verification admin
+        if (!$user->roles->contains('name', 'admin')) {
+            return response()->json(['error' => 'Access denied. Admins only.'], 403);
+        }
+
         $logs = Log::all();
         return response()->json($logs);
     }
@@ -18,6 +26,7 @@ class LogController extends Controller
      *     path="/api/logs/{id_action}",
      *     tags={"Logs"},
      *     summary="Retrieve logs by action ID",
+     *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id_action",
      *         in="path",
@@ -47,6 +56,13 @@ class LogController extends Controller
      */
     public function getLogsByFunctionId($id_action): \Illuminate\Http\JsonResponse
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        // verification admin
+        if (!$user->roles->contains('name', 'admin')) {
+            return response()->json(['error' => 'Access denied. Admins only.'], 403);
+        }
+
         $logs = Log::with('user')->where('id_action', $id_action)->get();
 
         $formattedLogs = $logs->map(function ($log) {
@@ -66,6 +82,7 @@ class LogController extends Controller
      *     path="/api/user-logs/{id_user}",
      *     tags={"Logs"},
      *     summary="Retrieve all logs for a specific user",
+     *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id_user",
      *         in="path",
@@ -96,6 +113,13 @@ class LogController extends Controller
 
     public function getUserLogs($id_user): \Illuminate\Http\JsonResponse
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        // verification admin
+        if (!$user->roles->contains('name', 'admin')) {
+            return response()->json(['error' => 'Access denied. Admins only.'], 403);
+        }
+
         $logs = Log::with('user')->where('id_user', $id_user)->get();
 
         $formattedLogs = $logs->map(function ($log) {

@@ -242,4 +242,5 @@ class AuthController extends Controller
             return response()->json(['error' => 'Token absent'], 404);
         }
     }
+
 }
