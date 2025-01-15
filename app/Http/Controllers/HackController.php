@@ -98,6 +98,7 @@ class HackController extends Controller
      *     path="/api/spam-email",
      *     tags={"Emails"},
      *     summary="Send spam emails",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -155,6 +156,7 @@ class HackController extends Controller
      *     path="/api/domains/{domain}",
      *     tags={"Domain"},
      *     summary="Retrieve all domains and subdomains associated with a given domain",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="domain",
      *         in="path",
@@ -226,6 +228,7 @@ class HackController extends Controller
      *     path="/api/generate-fake-identity/{count}",
      *     tags={"Fake Identity"},
      *     summary="Generate a list of fake identities",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="count",
      *         in="path",

@@ -16,6 +16,7 @@ class PasswordController extends Controller
      *     path="/api/generate-password",
      *     tags={"Password"},
      *     summary="Generate a secure password",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="length",
      *         in="query",
@@ -68,6 +69,7 @@ class PasswordController extends Controller
      *     tags={"Password"},
      *     summary="Check if a password is common and insecure",
      *     description="Verifies if the provided password is in a list of the most common passwords, making it insecure.",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
