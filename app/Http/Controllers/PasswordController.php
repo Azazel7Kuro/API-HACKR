@@ -65,7 +65,7 @@ class PasswordController extends Controller
      * Check if a password is in the list of most common passwords.
      *
      * @OA\Post(
-     *     path="/api/check-common-password",
+     *     path="/api/verified-password",
      *     tags={"Password"},
      *     summary="Check if a password is common and insecure",
      *     description="Verifies if the provided password is in a list of the most common passwords, making it insecure.",

@@ -893,14 +893,14 @@
                 ]
             }
         },
-        "/api/check-common-password": {
+        "/api/verified-password": {
             "post": {
                 "tags": [
                     "Password"
                 ],
                 "summary": "Check if a password is common and insecure",
                 "description": "Verifies if the provided password is in a list of the most common passwords, making it insecure.",
-                "operationId": "2b6f2b040644a2107daf20d9a2820793",
+                "operationId": "13e1f99c657ed9bd0f0db6a90c50cb4e",
                 "requestBody": {
                     "required": true,
                     "content": {
