@@ -1,6 +1,15 @@
 # API - HACKR
 ### NGUYEN Thomas - MBA DEV
 
+## Installation du projet en local
+
+1. Cloner le projet
+2. Installer les dépendances avec ```composer install```
+3. Créer un fichier .env à la racine du projet et y ajouter les informations de connexion à la base de données
+4. Génerer la clé d'application avec ```php artisan key:generate```
+5. Créer la base de données avec ```php artisan migrate```
+6. Lancer le serveur avec ```php artisan serve```
+
 ## Fonctionnalités
 
 * Outil de vérification d'existence d'adresse mail ✅
@@ -15,6 +24,7 @@
 
 * Contrôller l'accès à votre API grâce à un système de connexion basé sur JWT. ✅
 * Intégrer un fichier Swagger.json pour la partie documentation. ✅
+* Mettre en place un système de droits, gérable par des administrateurs, qui permet de définir quelles fonctionnalités peuvent être utilisées par quel utilisateur. ✅
 * Vous allez mettre en place un système de logs, interne à l'API, et consultable uniquement par les admins, qui permet de savoir quelles sont :
 
   - les dernièrs actions réalisées ✅
