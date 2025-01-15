@@ -8,14 +8,14 @@ https://thomas.nguyen.angers.mds-project.fr/api/documentation
 
 ## Installation du projet en local
 
-# Prérequis
+### Prérequis
 
 - PHP 8.2
 - Composer
 - Serveur MySQL
 - Serveur Apache
 
-# Installation
+### Installation
 
 1. Cloner le projet
 2. Installer les dépendances avec ```composer install```
