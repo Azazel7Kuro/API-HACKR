@@ -79,7 +79,7 @@ class LogController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/user-logs/{id_user}",
+     *     path="/api/log-user/{id_user}",
      *     tags={"Logs"},
      *     summary="Retrieve all logs for a specific user",
      *     security={{"bearerAuth": {}}},

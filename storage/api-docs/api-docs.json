@@ -761,13 +761,13 @@
                 ]
             }
         },
-        "/api/user-logs/{id_user}": {
+        "/api/log-user/{id_user}": {
             "get": {
                 "tags": [
                     "Logs"
                 ],
                 "summary": "Retrieve all logs for a specific user",
-                "operationId": "91875cbc7789bad6ad43f50a33381638",
+                "operationId": "138dba80d857cd902d8e0b22ed3c95b2",
                 "parameters": [
                     {
                         "name": "id_user",
