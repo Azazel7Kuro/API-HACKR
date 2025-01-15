@@ -3,7 +3,7 @@
 
 ## API en ligne
 
-https://thomas.nguyen.angers.mds-project.fr/api/documentation#/
+https://thomas.nguyen.angers.mds-project.fr/api/documentation
 
 
 ## Installation du projet en local
