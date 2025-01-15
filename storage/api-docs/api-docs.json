@@ -618,14 +618,14 @@
                 }
             }
         },
-        "/api/person-info-serpapi": {
+        "/api/person-info": {
             "get": {
                 "tags": [
                     "Person"
                 ],
                 "summary": "Get enriched information about a person using SerpApi",
                 "description": "Fetch enriched data about a person using SerpApi.",
-                "operationId": "af2431257e17a2a1161b382e543c3abe",
+                "operationId": "d47c6ac47086b47cec86dc2c71d026e6",
                 "parameters": [
                     {
                         "name": "name",

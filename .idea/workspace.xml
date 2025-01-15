@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="ajout de la collection postman a la racine">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +300,7 @@
       <workItem from="1736797836693" duration="76000" />
       <workItem from="1736798001954" duration="30000" />
       <workItem from="1736855804048" duration="12768000" />
-      <workItem from="1736928786629" duration="9799000" />
+      <workItem from="1736928786629" duration="10637000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -495,7 +494,31 @@
       <option name="project" value="LOCAL" />
       <updated>1736935831532</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="ajout de la collection postman a la racine">
+      <option name="closed" value="true" />
+      <created>1736948826538</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1736948826538</updated>
+    </task>
+    <task id="LOCAL-00026" summary="ajout de la collection postman a la racine">
+      <option name="closed" value="true" />
+      <created>1736948873493</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1736948873493</updated>
+    </task>
+    <task id="LOCAL-00027" summary="ajout de la collection postman a la racine">
+      <option name="closed" value="true" />
+      <created>1736948922050</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1736948922050</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

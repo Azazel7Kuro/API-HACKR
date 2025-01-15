@@ -333,7 +333,7 @@ class HackController extends Controller
      * Fetch enriched data about a person using SerpApi.
      *
      * @OA\Get(
-     *     path="/api/person-info-serpapi",
+     *     path="/api/person-info",
      *     tags={"Person"},
      *     summary="Get enriched information about a person using SerpApi",
      *     @OA\Parameter(
