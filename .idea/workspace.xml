@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="ajout de la collection postman a la racine">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
+    <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="ajout docker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +309,7 @@
       <workItem from="1742398549199" duration="130000" />
       <workItem from="1742456359338" duration="2791000" />
       <workItem from="1742459215417" duration="13000" />
-      <workItem from="1742459241352" duration="2712000" />
+      <workItem from="1742459241352" duration="9271000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -536,7 +535,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736949635079</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="ajout docker">
+      <option name="closed" value="true" />
+      <created>1742462378702</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1742462378702</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,6 +575,7 @@
     <MESSAGE value="ajout des restriction admin sur les fonction de log" />
     <MESSAGE value="tuto installation dans readme" />
     <MESSAGE value="ajout de la collection postman a la racine" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout de la collection postman a la racine" />
+    <MESSAGE value="ajout docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout docker" />
   </component>
 </project>
