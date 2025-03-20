@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="ajout de la collection postman a la racine">
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -300,7 +303,14 @@
       <workItem from="1736797836693" duration="76000" />
       <workItem from="1736798001954" duration="30000" />
       <workItem from="1736855804048" duration="12768000" />
-      <workItem from="1736928786629" duration="10637000" />
+      <workItem from="1736928786629" duration="12371000" />
+      <workItem from="1737388002898" duration="42000" />
+      <workItem from="1737388058610" duration="28000" />
+      <workItem from="1742389034256" duration="2010000" />
+      <workItem from="1742398549199" duration="130000" />
+      <workItem from="1742456359338" duration="2791000" />
+      <workItem from="1742459215417" duration="13000" />
+      <workItem from="1742459241352" duration="2712000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -518,7 +528,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736948922050</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="ajout de la collection postman a la racine">
+      <option name="closed" value="true" />
+      <created>1736949635079</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1736949635079</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
