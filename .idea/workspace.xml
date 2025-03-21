@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="11c32741-fdce-4dfc-b630-38ffa94539ad" name="Changes" comment="Correction de bug docker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,6 +317,7 @@
       <workItem from="1742475265845" duration="4973000" />
       <workItem from="1742545410485" duration="71000" />
       <workItem from="1742545501002" duration="16000" />
+      <workItem from="1742547901664" duration="7244000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -564,7 +567,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742485506775</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Correction de bug docker">
+      <option name="closed" value="true" />
+      <created>1742552013595</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1742552013595</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

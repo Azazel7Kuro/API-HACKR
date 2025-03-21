@@ -232,7 +232,7 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`id`, `user_id`, `role_id`) VALUES
-(1, 13, 1);
+(1, 18, 1);
 
 -- --------------------------------------------------------
 
