@@ -20,7 +20,11 @@ COPY composer.json ./
 
 RUN composer install
 
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN mkdir -p /var/www/html/storage/logs \
+    && touch /var/www/html/storage/logs/laravel.log \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod 664 /var/www/html/storage/logs/laravel.log
 
 EXPOSE 9000
 

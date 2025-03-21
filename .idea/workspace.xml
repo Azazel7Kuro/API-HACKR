@@ -223,7 +223,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hydre/IdeaProjects/API&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hydre/HackR&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -237,6 +237,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hydre\HackR" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hydre\HackR" />
     </key>
@@ -309,6 +312,9 @@
       <workItem from="1742459215417" duration="13000" />
       <workItem from="1742459241352" duration="9401000" />
       <workItem from="1742474113270" duration="29000" />
+      <workItem from="1742475265845" duration="4973000" />
+      <workItem from="1742545410485" duration="71000" />
+      <workItem from="1742545501002" duration="16000" />
     </task>
     <task id="LOCAL-00001" summary="Start project hackR">
       <option name="closed" value="true" />
@@ -550,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742473834717</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Correction de bug docker">
+      <option name="closed" value="true" />
+      <created>1742485506775</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1742485506775</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
