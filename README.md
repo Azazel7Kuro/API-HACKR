@@ -24,6 +24,12 @@ https://thomas.nguyen.angers.mds-project.fr/api/documentation
 5. Créer la base de données avec ```php artisan migrate```
 6. Lancer le serveur avec ```php artisan serve```
 
+### Docker
+
+Avoir docker Desktop de lancer
+créer les conteneurs avec ```docker-compose up -d```
+Dans Docker desktop cliquez sur le lien du nginx_container et aller à l'adresse /api/documentation pour accéder à swagger
+
 ## Fonctionnalités
 
 * Outil de vérification d'existence d'adresse mail ✅
